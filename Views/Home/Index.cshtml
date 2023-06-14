@@ -1,0 +1,334 @@
+﻿@model HoaTuoiBaSanh.Models.Product
+@using HoaTuoiBaSanh.FormatHelper
+<!-- Hero Section Begin -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/js/ajax.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<section class="hero">
+    <div class="hero__slider owl-carousel">
+        <div class="hero__items set-bg" data-setbg="/Content/img/hero/hero-2.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-7 col-md-8">
+                        <div class="hero__text">
+                            <h6>Cửa hàng</h6>
+                            <h2>Hoa Tươi Ba Sanh</h2>
+                            <p>
+                                Được thành lập vào năm 2002, chúng tôi chuyên cung cấp các loại hoa tươi cắt cành, hoa tươi Đà Lạt, hoa tươi Mộc Châu...với giá cả cạnh tranh, phải chăng.
+                            </p>
+                            <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+                            <div class="hero__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero__items set-bg" data-setbg="/Content/img/hero/hero-1.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-7 col-md-8">
+                        <div class="hero__text">
+                            <h6>Cửa hàng</h6>
+                            <h2>Ba Sanh Flower</h2>
+                            <p>
+                                Mẫu mã đa dạng, giá cả cạnh tranh, các sản phẩm cao cấp, khuyến mãi hấp dẫn,...
+                            </p>
+                            <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+                            <div class="hero__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+<!-- Banner Section Begin -->
+<section class="banner spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 offset-lg-4">
+                <div class="banner__item">
+                    <div class="banner__item__pic">
+                        <img src="~/Content/img/banner/Hoa.jpg" alt="">
+                    </div>
+                    <div class="banner__item__text">
+                        <h2>Hoa tươi cắt cành</h2>
+                        <a href="#">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="banner__item banner__item--middle">
+                    <div class="banner__item__pic">
+                        <img src="~/Content/img/banner/Xop.jpg" alt="">
+                    </div>
+                    <div class="banner__item__text">
+                        <h2>Phụ kiện ngành hoa</h2>
+                        <a href="#">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="banner__item banner__item--last">
+                    <div class="banner__item__pic">
+                        <img src="~/Content/img/banner/La.jpg" alt="">
+                    </div>
+                    <div class="banner__item__text">
+                        <h2>Lá cắm hoa </h2>
+                        <a href="#">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Banner Section End -->
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="filter__controls">
+                    <li class="active" data-filter="*">Bán chạy</li>
+                    <li data-filter=".new-arrivals">Sản phẩm mới</li>
+                    <li data-filter=".hot-sales">Đang giảm giá</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row product__filter">
+            @foreach (var item in Model.newProduct)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="/Content/img/product/@item.HinhAnh">
+                            <span class="label">New</span>
+
+                            <ul class="product__hover">
+                                <li>
+                                    <a href="#">
+                                        <img src="~/Content/img/icon/heart.png" alt="">
+                                        <span>Yêu thích</span>
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="add-to-cart" data-product-id="@item.MaHang">
+                                        <img src="~/Content/img/icon/cart.png">
+                                        <span>Thêm</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Shop/Detail/@item.MaHang">
+                                        <img src="~/Content/img/icon/detail.png" alt="">
+                                        <span>Chi tiết</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text" style="display: flex; flex-direction: column; align-items: center;">
+                            <a href="/Shop/Detail/@item.MaHang">
+                                <h5 style="text-align: center;">@item.TenHang</h5>
+                                <p style="font-size: 16px; margin-bottom: 0; text-align: center;">Giá: <span style="color: red;">@FormatHelper.FormatPriceVND((double)@item.GiaLe) đ<span></p>
+                            </a>
+                            <div class="rating">
+                                <i class="fa fa-star " style="color: #ffbb00"></i>
+                                <i class="fa fa-star " style="color: #ffbb00"></i>
+                                <i class="fa fa-star " style="color: #ffbb00"></i>
+                                <i class="fa fa-star " style="color: #ffbb00"></i>
+                                <i class="fa fa-star " style="color: #ffbb00"></i>
+                            </div>
+                        </div>
+                        <div class="button-center">
+                            <button class="button-cart" data-product-id="@item.MaHang">Thêm vào giỏ</button>
+                        </div>
+
+                    </div>
+                </div>
+            }
+            @foreach (var item in Model.saleProduct)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
+
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="/Content/img/product/@item.HinhAnh">
+                            <span class="label">Sale</span>
+
+                            <ul class="product__hover">
+                                <li>
+                                    <a href="#">
+                                        <img src="~/Content/img/icon/heart.png" alt="">
+                                        <span>Yêu thích</span>
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="add-to-cart" data-product-id="@item.MaHang">
+                                        <img src="~/Content/img/icon/cart.png">
+                                        <span>Thêm</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Shop/Detail/@item.MaHang">
+                                        <img src="~/Content/img/icon/detail.png" alt="">
+                                        <span>Chi tiết</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text" style="display: flex; flex-direction: column; align-items: center;">
+                            <a href="/Shop/Detail/@item.MaHang">
+                                <h5 style="text-align: center;">@item.TenHang</h5>
+                                <p style="font-size: 16px; margin-bottom: 0; text-align: center;">Giá: <span style="color: red;">@FormatHelper.FormatPriceVND((double)@item.GiaLe) đ<span></p>
+                            </a>
+                            <div class="rating">
+                                <i class="fa fa-star " style="color: #ffbb00"></i>
+                                <i class="fa fa-star " style="color: #ffbb00"></i>
+                                <i class="fa fa-star " style="color: #ffbb00"></i>
+                                <i class="fa fa-star " style="color: #ffbb00"></i>
+                                <i class="fa fa-star " style="color: #ffbb00"></i>
+                            </div>
+                        </div>
+                        <div class="button-center">
+                            <button class="button-cart" data-product-id="@item.MaHang">Thêm vào giỏ</button>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>
+<!-- Product Section End -->
+<!-- Categories Section Begin -->
+<section class="categories spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="categories__text">
+                    <h2>Hot Trend 2023 <br /> <span>Mẫu mã mới</span> <br />Đa dạng</h2>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="categories__hot__deal">
+                    <img src="~/Content/img/product-sale2.png" alt="">
+                    <div class="hot__deal__sticker">
+                        <span>Giảm giá</span>
+                        <h5>29.000đ</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 offset-lg-1">
+                <div class="categories__deal__countdown">
+                    <span>Giảm giá trong tuần</span>
+                    <h2>Ly Kép Hồng Cao Cấp</h2>
+                    <div class="categories__deal__countdown__timer" id="countdown">
+                        <div class="cd-item">
+                            <span>3</span>
+                            <p>Ngày</p>
+                        </div>
+                        <div class="cd-item">
+                            <span>1</span>
+                            <p>Giờ</p>
+                        </div>
+                        <div class="cd-item">
+                            <span>50</span>
+                            <p>Phút</p>
+                        </div>
+                        <div class="cd-item">
+                            <span>18</span>
+                            <p>Giây</p>
+                        </div>
+                    </div>
+                    <a href="#" class="primary-btn">Mua ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Categories Section End -->
+<!-- Instagram Section Begin -->
+<section class="instagram spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="instagram__pic">
+                    <div class="instagram__pic__item set-bg" data-setbg="/Content/img/product/camchuong1.jpg"></div>
+                    <div class="instagram__pic__item set-bg" data-setbg="/Content/img/product/came1.png"></div>
+                    <div class="instagram__pic__item set-bg" data-setbg="/Content/img/product/HoaCatTuong.jpg"></div>
+                    <div class="instagram__pic__item set-bg" data-setbg="/Content/img/product/lily.jpg"></div>
+                    <div class="instagram__pic__item set-bg" data-setbg="/Content/img/product/Maudon1.jpg"></div>
+                    <div class="instagram__pic__item set-bg" data-setbg="/Content/img/product/MON001.jpg"></div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="instagram__text">
+                    <h2>Instagram</h2>
+                    <p>
+                        Các sản phẩm về hoa tươi được cung cấp trong ngày, đảm bảo về chất lượng, giá cả hợp lý.
+                    </p>
+                    <h3>#HTBS</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Instagram Section End -->
+<!-- Latest Blog Section Begin -->
+<section class="latest spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <span>Latest News</span>
+                    <h2>Fashion New Trends</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="blog__item">
+                    <div class="blog__item__pic set-bg" data-setbg="/Content/img/blog/blog-1.jpg"></div>
+                    <div class="blog__item__text">
+                        <span><img src="~/Content/img/icon/calendar.png" alt=""> 16 February 2020</span>
+                        <h5>What Curling Irons Are The Best Ones</h5>
+                        <a href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="blog__item">
+                    <div class="blog__item__pic set-bg" data-setbg="/Content/img/blog/blog-2.jpg"></div>
+                    <div class="blog__item__text">
+                        <span><img src="~/Content/img/icon/calendar.png" alt=""> 21 February 2020</span>
+                        <h5>Eternity Bands Do Last Forever</h5>
+                        <a href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="blog__item">
+                    <div class="blog__item__pic set-bg" data-setbg="/Content/img/blog/blog-3.jpg"></div>
+                    <div class="blog__item__text">
+                        <span><img src="~/Content/img/icon/calendar.png" alt=""> 28 February 2020</span>
+                        <h5>The Health Benefits Of Sunglasses</h5>
+                        <a href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Latest Blog Section End -->

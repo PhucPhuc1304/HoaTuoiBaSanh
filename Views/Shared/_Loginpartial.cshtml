@@ -1,0 +1,18 @@
+﻿@if (Session["username"] != null)
+{
+
+    <div class="col-md-4  d-flex topper align-items-center text-lg-right">
+        <span class="text">Xin chào @Session["TenKH"]</span>
+
+    </div>
+    <div class="col-md-2 pr-4 d-flex topper align-items-center text-lg-right">
+        @Html.ActionLink("Đăng Xuất", "Logout", "Home", routeValues: null, htmlAttributes: new { @class = "text" })
+    </div>
+
+}
+else
+{
+        @Html.ActionLink("Đăng ký", "DangKy", "Home", routeValues: null, htmlAttributes: new { @class = "text" })
+        @Html.ActionLink("Đăng nhập", "Login", "Home", routeValues: null, htmlAttributes: new { @class = "text" })
+
+}

@@ -1,0 +1,206 @@
+﻿
+@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<HoaTuoiBaSanh.Models.HangHoa>
+@using HoaTuoiBaSanh.FormatHelper
+
+
+<!-- Shop Section Begin -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/js/ajax.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<section class="shop spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="shop__sidebar">
+                    <div class="shop__sidebar__search">
+                        <form action="@Url.Action("Index")" method="get">
+                            <input type="text" name="searchString" placeholder="Nhập từ khóa..." value="@ViewBag.CurrentFilter">
+                            <button type="submit">Tìm kiếm</button>
+                        </form>
+                    </div>
+                    <div class="shop__sidebar__accordion">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-heading">
+                                    <a data-toggle="collapse" data-target="#collapseThree">Danh mục</a>
+                                </div>
+                                <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="shop__sidebar__categories">
+                                            <ul class="nice-scroll">
+                                                <li><a href="@Url.Action("Index", "Shop")">Tất cả sản phẩm</a></li>
+                                                @foreach (var item in ViewBag.CategoryList)
+                                                {
+                                                    <li><a href="@Url.Action("Index", "Shop", new {Loai = item.Value})">@item.Text</a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card">
+                                <div class="card-heading">
+                                    <a data-toggle="collapse" data-target="#collapseThree">Lọc theo giá</a>
+                                </div>
+                                <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="shop__sidebar__price">
+                                            <ul>
+                                                <li><a href="@Url.Action("Index", new {sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, priceFilter = "0-50" })">0 - 50.000đ</a></li>
+                                                <li><a href="@Url.Action("Index", new {sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, priceFilter = "50-100" })">50.0000đ - 100.000đ</a></li>
+                                                <li><a href="@Url.Action("Index", new {sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, priceFilter = "100-150" })">100.000đ - 150.000đ</a></li>
+                                                <li><a href="@Url.Action("Index", new {sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, priceFilter = "150-200" })">150.000đ - 200.000đ</a></li>
+                                                <li><a href="@Url.Action("Index", new {sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, priceFilter = "200-250" })">200.000đ - 250.000đ</a></li>
+                                                <li><a href="@Url.Action("Index", new {sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, priceFilter = "250" })">> 250.0000d</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="shop__product__option">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__left">
+                                <p>Hiển thị @Model.Count tên @Model.TotalItemCount kết quả</p>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__right">
+                                <p>Sắp xếp theo :</p>
+                                <select onchange="location = this.value;">
+                                    <option value="@Url.Action("Index", new { Loai = Request.QueryString["Loai"],sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })">Tên</option>
+                                    <option value="@Url.Action("Index", new { Loai = Request.QueryString["Loai"],sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter })">Giá</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="/Content/img/product/@item.HinhAnh">
+
+                                    <ul class="product__hover">
+                                        <li>
+                                            <a href="#">
+                                                <img src="~/Content/img/icon/heart.png" alt="">
+                                                <span>Yêu thích</span>
+
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="add-to-cart" data-product-id="@item.MaHang">
+                                                <img src="~/Content/img/icon/cart.png">
+                                                <span>Thêm</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Shop/Detail/@item.MaHang">
+                                                <img src="~/Content/img/icon/detail.png" alt="">
+                                                <span>Chi tiết</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <a href="/Shop/Detail/@item.MaHang">
+                                        <h5 style="text-align: center;">@item.TenHang</h5>
+                                        <p style="font-size: 16px; margin-bottom: 0; text-align: center;">Giá: <span style="color: red;">@FormatHelper.FormatPriceVND((double)@item.GiaLe) đ<span></p>
+                                    </a>
+                                </div>
+                                <div class="button-center">
+                                    <button class="button-cart"  data-product-id="@item.MaHang">Thêm vào giỏ</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product__pagination">
+                            @for (int i = 1; i <= Model.PageCount; i++)
+                            {
+                                <a class="@(Model.PageNumber == i ? "active" : "")" href="@Url.Action("Index", new { Loai = Request.QueryString["Loai"], page = i, sortOrder = Request.QueryString["sortOrder"], currentFilter = Request.QueryString["currentFilter"],priceFilter = Request.QueryString["priceFilter"] })">@i</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal" id="successModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thành công</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Sản phẩm đã được thêm vào giỏ hàng thành công.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="modal fade right" id="modalAbandonedCart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true" data-backdrop="false">
+            <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
+                <!--Content-->
+                <!--Body-->
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-3">
+                            <p></p>
+                            <p class="text-center"><i class="fas fa-shopping-cart fa-4x"></i></p>
+                        </div>
+
+                        <div class="col-9">
+                            <p>Do you need more time to make a purchase decision?</p>
+                            <p>No pressure, your product will be waiting for you in the cart.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Footer-->
+
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+
+</section>

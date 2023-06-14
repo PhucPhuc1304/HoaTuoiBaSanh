@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="63372557a6c74129b9c493706f17cef0" Name="Diagram1">
+        <EntityTypeShape EntityType="webModel.CTHD" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.DonGia" Width="1.5" PointX="1.5" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.DonViTinh" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.HangHoa" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.HinhThuc" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.HoaDon" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.KhachHang" Width="1.5" PointX="0.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.KhoHang" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.LoaiHang" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.LoaiKhach" Width="1.5" PointX="1.5" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.NhaCungCap" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.NhanVien" Width="1.5" PointX="0.75" PointY="33.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.Role" Width="1.5" PointX="1.5" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webModel.TaiKhoan" Width="1.5" PointX="1.5" PointY="27.875" IsExpanded="true" />
+        <AssociationConnector Association="webModel.Relationship16" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship17" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship18" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship19" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship5" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship4" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship6" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship7" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship13" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship15" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship21" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship3" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship20" ManuallyRouted="false" />
+        <AssociationConnector Association="webModel.Relationship11" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

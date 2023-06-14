@@ -1,0 +1,143 @@
+﻿@model IEnumerable<HoaTuoiBaSanh.Models.CartModel>
+@using HoaTuoiBaSanh.FormatHelper
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/js/ajax.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#removecart").click(function () {
+
+            var model = {};
+            //lấy id sản phẩm
+            model.Id = $("#productid").val();
+            model.quatity = parseInt($("#quantity").val(), 10);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Remove", "Shop")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    $('#CartCount').text(@Session["count"]);
+                    $("#product-" + model.Id).remove();
+                    toastr.success("Xóa sản phẩm ra khỏi giỏ hàng thành công.", "", {
+                        timeOut: 2000,
+                        progressBar: true,
+                        closeButton: true
+                    })
+                    location.reload();
+                    ;
+
+                },
+                error: function () {
+                    toastr.error("Lỗi... Xóa sản phẩm ra khỏi giỏ hàng không thành công.", "", {
+                        timeOut: 2000,
+                        progressBar: true,
+                        closeButton: true
+                    });                }
+            });
+            return false;
+        });
+    });
+</script>
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="shopping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Session["count"] != null && (int)Session["count"] != 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="product__cart__item">
+                                            <div class="product__cart__item__pic">
+                                                <img src="/Content/img/product/@item.sanPham.HinhAnh" alt="" style="width: 90px; height: 90px;">
+                                            </div>
+                                            <div class="product__cart__item__text">
+                                                <h6>@item.sanPham.TenHang</h6>
+                                                <h5>@FormatHelper.FormatPriceVND((double)@item.sanPham.GiaLe) đ</h5>
+                                            </div>
+                                        </td>
+                                        <td class="quantity__item">
+                                            <div class="quantity">
+                                                <div class="pro-qty-2">
+                                                    <input id="quantity" type="text" value="@item.Quantity">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="cart__price">@FormatHelper.FormatPriceVND((double)@item.Total) đ</td>
+                                        <td class="cart__close">
+                                            <input type="hidden" value="@item.sanPham.MaHang" id="productid" />
+                                            <a href="#" id="removecart"><i class="fa fa-close"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td class="text-center" colspan="6"><h4>Giỏ hàng của bạn đang trống.</h4></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn">
+                            <a href="#">Continue Shopping</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn update__btn">
+                            <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="cart__discount">
+                    <h6>Discount codes</h6>
+                    <form action="#">
+                        <input type="text" placeholder="Coupon code">
+                        <button type="submit">Apply</button>
+                    </form>
+                </div>
+                <div class="cart__total">
+
+
+                    @if (Model != null && Model.Any())
+                    {
+                        var lastItem = Model.LastOrDefault(); // Get the last item from the collection
+
+                        <ul>
+                            <li>Subtotal: <span>@FormatHelper.FormatPriceVND((double)lastItem.Subtotal) đ</span></li>
+                            <li>Total: <span>@FormatHelper.FormatPriceVND((double)lastItem.Subtotal) đ</span></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul>
+                            <li>Subtotal: <span>0 đ</span></li>
+                            <li>Total: <span>0 đ</span></li>
+                        </ul>
+                    }
+                    <a href="#" class="primary-btn">Proceed to checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
